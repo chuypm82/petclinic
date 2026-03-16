@@ -5,7 +5,7 @@ pipeline {
 
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/chuypm82/petclinic.git'
+                git branch: 'main', url: 'https://github.com/chuypm82/petclinic.git'
             }
         }
 
