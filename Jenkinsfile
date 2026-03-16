@@ -5,7 +5,7 @@ pipeline {
 
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/petclinic.git'
+                git 'https://github.com/chuypm82/petclinic.git'
             }
         }
 
