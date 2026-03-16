@@ -2,40 +2,30 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+
+        stage('Clone Repo') {
             steps {
-                git 'http://github.com/USER/REPO.git'
-                // Run Maven Wrapper Commands
-                echo 'Building the Project with maven compile'
+                git 'https://github.com/YOUR_USERNAME/petclinic.git'
             }
         }
 
-        stage('Test') {
+        stage('Build Maven') {
             steps {
-                // Run Maven Wrapper Commands
-                echo 'Testing the Project with maven test'
+                sh 'mvn clean package'
             }
         }
 
-        stage('Package') {
+        stage('Build Docker Image') {
             steps {
-                // Run Maven Wrapper Commands
-                echo 'Packaging the Project with maven package'
+                sh 'docker build -t petclinic-app .'
             }
         }
 
-        stage('Containerize') {
+        stage('Run Docker Container') {
             steps {
-                // Docker build command
-                echo 'Containerize the App with docker'
+                sh 'docker run -d -p 8082:8082 petclinic-app'
             }
         }
 
-        stage('Deploy') {
-            steps {
-                // Docker run command with detached mode
-                echo 'Deploy the App with Docker'
-            }
-        }
     }
 }
